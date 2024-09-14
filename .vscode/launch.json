@@ -1,18 +1,13 @@
 {
-    "configurations": [
-        {
-            "name": "C/C++: clang++ сборка и отладка активного файла",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "lldb",
-            "preLaunchTask": "C/C++: clang++ сборка активного файла"
-        }
-    ],
-    "version": "2.0.0"
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/alexandr/Desktop/ya_prac/ya_prac_projects/cpp-single-linked-list/single-linked-list",
+      "program": "/Users/alexandr/Desktop/ya_prac/ya_prac_projects/cpp-single-linked-list/single-linked-list/build/Debug/outDebug"
+    }
+  ]
 }

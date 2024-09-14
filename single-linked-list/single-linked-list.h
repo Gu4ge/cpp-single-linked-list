@@ -167,6 +167,7 @@ public:
             if (rhs.IsEmpty())
             {
                 Clear();
+                return *this;
             }
 
             SingleLinkedList temp(rhs);
