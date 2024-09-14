@@ -77,7 +77,7 @@ class SingleLinkedList
 
         BasicIterator operator++(int) noexcept
         {
-            assert(node_ != nullptr);
+            // assert(node_ != nullptr);
 
             auto old_value(*this);
             ++(*this);
@@ -164,42 +164,54 @@ public:
     {
         if (this != &rhs)
         {
+            if (rhs.IsEmpty())
+            {
+                Clear();
+            }
+
             SingleLinkedList temp(rhs);
             swap(temp);
         }
         return *this;
     }
 
-    [[nodiscard]] Iterator before_begin() noexcept {
+    [[nodiscard]] Iterator before_begin() noexcept
+    {
         return Iterator{&head_};
     }
 
-    [[nodiscard]] ConstIterator cbefore_begin() const noexcept {
-        return ConstIterator{const_cast<Node*>(&head_)};
+    [[nodiscard]] ConstIterator cbefore_begin() const noexcept
+    {
+        return ConstIterator{const_cast<Node *>(&head_)};
     }
 
-    [[nodiscard]] ConstIterator before_begin() const noexcept {
-        return ConstIterator{const_cast<Node*>(&head_)};
+    [[nodiscard]] ConstIterator before_begin() const noexcept
+    {
+        return ConstIterator{const_cast<Node *>(&head_)};
     }
 
-    Iterator InsertAfter(ConstIterator pos, const Type& value) {
+    Iterator InsertAfter(ConstIterator pos, const Type &value)
+    {
         assert(pos.node_ != nullptr);
-        Node* insert_after = new Node(value, pos.node_->next_node);
+        Node *insert_after = new Node(value, pos.node_->next_node);
         pos.node_->next_node = insert_after;
         size_++;
         return Iterator{insert_after};
     }
 
-    void PopFront() noexcept {
-        Node* n_head = head_.next_node->next_node;
+    void PopFront() noexcept
+    {
+        assert(!IsEmpty());
+        Node *n_head = head_.next_node->next_node;
         delete head_.next_node;
         head_.next_node = n_head;
         size_--;
     }
 
-    Iterator EraseAfter(ConstIterator pos) noexcept {
+    Iterator EraseAfter(ConstIterator pos) noexcept
+    {
         assert(!IsEmpty() || pos.node_ != nullptr);
-        Node* erase_after = pos.node_->next_node->next_node;
+        Node *erase_after = pos.node_->next_node->next_node;
         delete pos.node_->next_node;
         pos.node_->next_node = erase_after;
         size_--;
@@ -289,7 +301,7 @@ bool operator<(const SingleLinkedList<Type> &lhs, const SingleLinkedList<Type> &
 template <typename Type>
 bool operator<=(const SingleLinkedList<Type> &lhs, const SingleLinkedList<Type> &rhs)
 {
-    return (lhs < rhs || lhs == rhs);
+    return !(lhs > rhs);
 }
 
 template <typename Type>
